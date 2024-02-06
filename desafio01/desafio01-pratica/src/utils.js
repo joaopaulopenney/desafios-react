@@ -3,7 +3,6 @@ export function login({ email, password }) {
     
     return new Promise((resolve, reject) => {
       setTimeout(function () {
-        console.log(email, password)
         if (password === 'password123' && !!email) {
           resolve({ email: email, password: password });
         } else {

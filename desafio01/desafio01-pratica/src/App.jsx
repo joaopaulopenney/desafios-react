@@ -18,6 +18,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState();
+  const [disable, setDisable] = useState("");
 
   return (
     <div className='wrapper'>
@@ -27,15 +28,19 @@ export default function LoginForm() {
         { err && <div className='errorMessage'>{err}</div>}
         <div className='row'>
           <label htmlFor={'email'}>Email</label>
-          <input id={'email'} type={'email'} autoComplete='off' onChange={(e) => setEmail(e.target.value)} />
+          <input id={'email'} type={'email'} autoComplete='off' value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className='row'>
           <label htmlFor={'password'}>Password</label>
-          <input id={'password'} type={'password'} onChange={(e) => setPassword(e.target.value)} />
+          <input id={'password'} type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
 
         <div className='button'>
-            <button onClick={() => login({ email, password }).then((res) => {console.log(res)}).catch((err) => setErr(err.message))}>Login</button>
+            <button disabled={ email == "" || password.length < 6 || disable == "true" ? true : "" } onClick={() => {
+              setErr("");
+              setDisable("true");
+              login( {email, password} ).then(() => { alert("Login efetuado com sucesso") }).catch((err) => { setErr(err.message) }).finally(() => { setEmail(""); setPassword(""); setDisable("") })
+              }}>Login</button>
         </div>
       </div>
     </div>
