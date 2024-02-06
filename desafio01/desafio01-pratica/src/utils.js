@@ -5,7 +5,7 @@ export function login({ email, password }) {
       setTimeout(function () {
         console.log(email, password)
         if (password === 'password123' && !!email) {
-          resolve();
+          resolve({ email: email, password: password });
         } else {
           reject({ message: 'e-mail or password wrong.' });
         }

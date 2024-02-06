@@ -17,7 +17,6 @@ import { useState } from 'react';
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [res, setRes] = useState();
   const [err, setErr] = useState();
 
   return (
@@ -36,7 +35,7 @@ export default function LoginForm() {
         </div>
 
         <div className='button'>
-          <button onClick={() => login(email, password).then((res) => {console.log(res)}).catch((err) => setErr(err.message))}>Login</button>
+            <button onClick={() => login({ email, password }).then((res) => {console.log(res)}).catch((err) => setErr(err.message))}>Login</button>
         </div>
       </div>
     </div>
