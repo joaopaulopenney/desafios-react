@@ -35,25 +35,71 @@ Ao enviar, deve-se apresentar um alert javascript com sucesso, limpar todos os c
 do formulário e zerar a barra de progresso novamente.
 */
 
+import { useState } from "react";
+
 function App() {
+  const [form, setForm] = useState({name: "", email: "", state: "", gender: ""});
+
+  const handleName = (e) => {
+    let updatedValue = {};
+    updatedValue = {name: e.target.value};
+    setForm(form => ({
+      ...form,
+      ...updatedValue
+    }));
+  }
+
+  const handleEmail = (e) => {
+    let updatedValue = {};
+    updatedValue = {email: e.target.value};
+    setForm(form => ({
+      ...form,
+      ...updatedValue
+    }));
+  }
+
+  const handleState = (e) => {
+    let updatedValue = {};
+    updatedValue = {state: e.target.value};
+    setForm(form => ({
+      ...form,
+      ...updatedValue
+    }));
+  }
+
+  const handleGender = (e) => {
+    let updatedValue = {};
+    updatedValue = {gender: e.target.value};
+    setForm(form => ({
+      ...form,
+      ...updatedValue
+    }));
+  }
+
+  const submitForm = () => {
+    window.location.reload();
+    alert("Sucesso")
+  }
+  console.log(form)
+
   return (
     <div className='App'>
       <h3>desafio fernandev</h3>
       <h1>progresso do formulário</h1>
 
       <main>
-        {/* crie a barra de progresso aqui */}
+        <div className="bar-container">{ form.name && <div className="bar"></div> }{ form.email && <div className="bar"></div> }{ form.state && <div className="bar"></div> }{ form.gender && <div className="bar"></div> }</div>
         <div className='form-group'>
-          <label htmlFor=''>Nome Completo</label>
-          <input />
+          <label htmlFor='name'>Nome Completo</label>
+          <input type="text" id="name" name="name" value={form.name} onChange={handleName} />
         </div>
         <div className='form-group'>
-          <label htmlFor=''>E-mail</label>
-          <input />
+          <label htmlFor='email'>E-mail</label>
+          <input type="email" id="email" name="email" value={form.email} onChange={handleEmail} />
         </div>
         <div className='form-group'>
-          <label htmlFor=''>Estado Civil</label>
-          <select>
+          <label htmlFor='state'>Estado Civil</label>
+          <select id="state" name="state" onChange={handleState}>
             <option value=''>- selecione...</option>
             <option value='solteiro'>Solteiro</option>
             <option value='casado'>Casado</option>
@@ -61,17 +107,17 @@ function App() {
           </select>
         </div>
         <div className='form-group'>
-          <label htmlFor=''>Gênero</label>
+          <label htmlFor='gender'>Gênero</label>
           <div className='radios-container'>
             <span>
-              <input type='radio' /> Masculino
+              <input type='radio' name="gender" id="gender" value="masculino" onClick={handleGender}/> Masculino
             </span>
             <span>
-              <input type='radio' /> Feminino
+              <input type='radio' name="gender" id="gender" value="feminino" onClick={handleGender}/> Feminino
             </span>
           </div>
         </div>
-        <button>Enviar Formulário</button>
+        <button disabled={ !form.name || !form.email || !form.state || !form.gender } onClick={submitForm}>Enviar Formulário</button>
       </main>
     </div>
   );
