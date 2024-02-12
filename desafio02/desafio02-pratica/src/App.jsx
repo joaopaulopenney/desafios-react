@@ -35,10 +35,12 @@ Ao enviar, deve-se apresentar um alert javascript com sucesso, limpar todos os c
 do formulário e zerar a barra de progresso novamente.
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [form, setForm] = useState({name: "", email: "", state: "", gender: ""});
+  const [isEmail, setIsEmail] = useState(false);
+  const [isName, setIsName] = useState(false);
 
   const handleName = (e) => {
     let updatedValue = {};
@@ -47,7 +49,7 @@ function App() {
       ...form,
       ...updatedValue
     }));
-  }
+  };
 
   const handleEmail = (e) => {
     let updatedValue = {};
@@ -56,7 +58,7 @@ function App() {
       ...form,
       ...updatedValue
     }));
-  }
+  };
 
   const handleState = (e) => {
     let updatedValue = {};
@@ -65,7 +67,7 @@ function App() {
       ...form,
       ...updatedValue
     }));
-  }
+  };
 
   const handleGender = (e) => {
     let updatedValue = {};
@@ -74,13 +76,34 @@ function App() {
       ...form,
       ...updatedValue
     }));
-  }
+  };
 
   const submitForm = () => {
     window.location.reload();
     alert("Sucesso")
-  }
-  console.log(form)
+  };
+
+  const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  const nameRegEx = /^([A-Z][a-z]{1,}\s)+[A-Z][a-z]{1,}$/;
+
+  useEffect(() => {
+    const result = emailRegEx.test(form.email);
+    if (result == true) {
+      setIsEmail(true);
+    } else {
+      setIsEmail(false);
+    }
+  }, [form.email])
+
+  useEffect(() => {
+    const result = nameRegEx.test(form.name);
+    if (result == true) {
+      setIsName(true);
+    } else {
+      setIsName(false);
+    }
+  }, [form.name])
 
   return (
     <div className='App'>
@@ -88,7 +111,7 @@ function App() {
       <h1>progresso do formulário</h1>
 
       <main>
-        <div className="bar-container">{ form.name && <div className="bar"></div> }{ form.email && <div className="bar"></div> }{ form.state && <div className="bar"></div> }{ form.gender && <div className="bar"></div> }</div>
+        <div className="bar-container">{ isName && <div className="bar"></div> }{ isEmail && <div className="bar"></div> }{ form.state && <div className="bar"></div> }{ form.gender && <div className="bar"></div> }</div>
         <div className='form-group'>
           <label htmlFor='name'>Nome Completo</label>
           <input type="text" id="name" name="name" value={form.name} onChange={handleName} />
@@ -117,7 +140,7 @@ function App() {
             </span>
           </div>
         </div>
-        <button disabled={ !form.name || !form.email || !form.state || !form.gender } onClick={submitForm}>Enviar Formulário</button>
+        <button disabled={ !isName || !isEmail || !form.state || !form.gender } onClick={submitForm}>Enviar Formulário</button>
       </main>
     </div>
   );
