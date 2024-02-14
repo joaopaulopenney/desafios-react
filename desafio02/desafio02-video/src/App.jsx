@@ -106,7 +106,7 @@ function App() {
       <h1>progresso do formulário</h1>
 
       <main>
-        <div className="bar-contaier">
+        <div className="bar-container">
           <div className="bar" style={{ width: `${calculateProgress()}%` }}></div>
         </div>
         <div className='form-group'>
