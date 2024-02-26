@@ -26,10 +26,24 @@ function App() {
   const [pokes, setPokes] = useState([]);
 
   const getPokemon = () => {
-    for ( let i = 1 ; i <= 25 ; i++ ) {
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`).then((res) => setPokes((prev) => [...prev, res])).catch((err) => console.log(err));
+    var endpoints = []
+    
+    for ( let i = 1 ; i <= 100 ; i++ ) {
+      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
     }
-}
+
+    axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then((res) => setPokes(res)).catch((err) => console.log(err))
+  };
+
+  const sortArray = () => {
+    pokes.sort(function(a, b) {
+      if (a.data.name < b.data.name) {
+        return -1;
+      } else {
+        return true;
+      }
+    }) 
+  };
 
   useEffect(() => {
     
@@ -37,7 +51,7 @@ function App() {
 
   }, []);
 
-  console.log(pokes);
+  sortArray();
 
   return (
     <>
