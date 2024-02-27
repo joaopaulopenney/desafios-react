@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-game {
+  display: grid;
+  width: 600px;
+  height: 600px;
+  grid-template-columns: 200px 200px 200px;
+  margin-top: 10px;
+}
+
+.item {
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 150px;
+}
+
+
+
+
+
