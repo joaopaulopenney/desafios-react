@@ -21,6 +21,8 @@ function App() {
   const [player, setPlayer] = useState(true);
   const [games, setGames] = useState({ block1: "", block2: "", block3: "", block4: "", block5: "", block6: "", block7: "", block8: "", block9: "" });
   const [points, setPoints] = useState({ playerX: 0, playerO: 0 });
+  const [result, setResult] = useState({ top: "", left: "", width: "", rotate: "" });
+  const [timer, setTimer] = useState(false);
 
   const game = (e) => {
 
@@ -52,115 +54,115 @@ function App() {
       const newPoints = { ...prev, playerX: points.playerX + 1 }
       return newPoints;
     })
-    alert("Player1 Wins")
+    setResult({ top: "25%", left: "20%", width: "60vw", rotate: "null" })
   } else if (games.block4 == "X" && games.block5 == "X" && games.block6 == "X") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerX: points.playerX + 1 }
       return newPoints;
     })
-    alert("Player1 Wins")
+    setResult({ top: "54%", left: "20%", width: "60vw", rotate: "null" })
   } else if (games.block7 == "X" && games.block8 == "X" && games.block9 == "X") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerX: points.playerX + 1 }
       return newPoints;
     })
-    alert("Player1 Wins")
+    setResult({ top: "84%", left: "20%", width: "60vw", rotate: "null" })
   } else if (games.block1 == "X" && games.block4 == "X" && games.block7 == "X") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerX: points.playerX + 1 }
       return newPoints;
     })
-    alert("Player1 Wins")
+    setResult({ top: "54%", left: "13%", width: "45vw", rotate: "rotate(90deg)" })
   } else if (games.block2 == "X" && games.block5 == "X" && games.block8 == "X") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerX: points.playerX + 1 }
       return newPoints;
     })
-    alert("Player1 Wins")
+    setResult({ top: "54%", left: "27.5%", width: "45vw", rotate: "rotate(90deg)" })
   } else if (games.block3 == "X" && games.block6 == "X" && games.block9 == "X") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerX: points.playerX + 1 }
       return newPoints;
     })
-    alert("Player1 Wins")
+    setResult({ top: "54%", left: "42%", width: "45vw", rotate: "rotate(90deg)" })
   } else if (games.block1 == "X" && games.block5 == "X" && games.block9 == "X") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerX: points.playerX + 1 }
       return newPoints;
     })
-    alert("Player1 Wins")
+    setResult({ top: "54%", left: "20%", width: "60vw", rotate: "rotate(45deg)" })
   } else if (games.block3 == "X" && games.block5 == "X" && games.block7 == "X") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerX: points.playerX + 1 }
       return newPoints;
     })
-    alert("Player1 Wins")
+    setResult({ top: "54%", left: "20%", width: "60vw", rotate: "rotate(-45deg)" })
   } else if (games.block1 == "O" && games.block2 == "O" && games.block3 == "O") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerO: points.playerO + 1 }
       return newPoints;
     })
-    alert("Player2 Wins")
+    setResult({ top: "25%", left: "20%", width: "60vw", rotate: "null" })
   } else if (games.block4 == "O" && games.block5 == "O" && games.block6 == "O") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerO: points.playerO + 1 }
       return newPoints;
     })
-    alert("Player2 Wins")
+    setResult({ top: "54%", left: "20%", width: "60vw", rotate: "null" })
   } else if (games.block7 == "O" && games.block8 == "O" && games.block9 == "O") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerO: points.playerO + 1 }
       return newPoints;
     })
-    alert("Player2 Wins")
+    setResult({ top: "84%", left: "20%", width: "60vw", rotate: "null" })
   } else if (games.block1 == "O" && games.block4 == "O" && games.block7 == "O") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerO: points.playerO + 1 }
       return newPoints;
     })
-    alert("Player2 Wins")
+    setResult({ top: "54%", left: "13%", width: "45vw", rotate: "rotate(90deg)" })
   } else if (games.block2 == "O" && games.block5 == "O" && games.block8 == "O") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerO: points.playerO + 1 }
       return newPoints;
     })
-    alert("Player2 Wins")
+    setResult({ top: "54%", left: "27.5%", width: "45vw", rotate: "rotate(90deg)" })
   } else if (games.block3 == "O" && games.block6 == "O" && games.block9 == "O") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerO: points.playerO + 1 }
       return newPoints;
     })
-    alert("Player2 Wins")
+    setResult({ top: "54%", left: "42%", width: "45vw", rotate: "rotate(90deg)" })
   } else if (games.block1 == "O" && games.block5 == "O" && games.block9 == "O") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerO: points.playerO + 1 }
       return newPoints;
     })
-    alert("Player2 Wins")
+    setResult({ top: "54%", left: "20%", width: "60vw", rotate: "rotate(45deg)" })
   } else if (games.block3 == "O" && games.block5 == "O" && games.block7 == "O") {
     setPoints((prev) => {
       const newPoints = { ...prev, playerO: points.playerO + 1 }
       return newPoints;
     })
-    alert("Player2 Wins")
-  }
-
-  if (games.block1 && games.block2 && games.block3 && games.block4 && games.block5 && games.block6 && games.block7 && games.block8 && games.block9) {
-    setGames({ block1: "", block2: "", block3: "", block4: "", block5: "", block6: "", block7: "", block8: "", block9: "" });
+    setResult({ top: "54%", left: "20%", width: "60vw", rotate: "rotate(-45deg)" })
+  } else if (games.block1 && games.block2 && games.block3 && games.block4 && games.block5 && games.block6 && games.block7 && games.block8 && games.block9) {
     alert("Draw")
+    setGames({ block1: "", block2: "", block3: "", block4: "", block5: "", block6: "", block7: "", block8: "", block9: "" });
   }
   }
 
   useEffect(() => {
     plays();
-  }, [player])
+  }, [player]);
 
   useEffect(() => {
-    setGames({ block1: "", block2: "", block3: "", block4: "", block5: "", block6: "", block7: "", block8: "", block9: "" });
-
-  }, [points])
-
-  
+    setTimer(true);
+    setTimeout(function() {
+      setGames({ block1: "", block2: "", block3: "", block4: "", block5: "", block6: "", block7: "", block8: "", block9: "" });
+      setResult({ top: "", left: "", width: "", rotate: "" });
+      setTimer(false);
+    }, 2000)
+  }, [points]);
 
   return (
     <>
@@ -168,7 +170,7 @@ function App() {
       <h1>jogo da velha</h1>
       <div className='points'>PlayerX : {points.playerX} VS PlayerO : {points.playerO}</div>
       <div className='playing'>Playing: {player && "PlayerX"} {!player && "PlayerO"}</div>
-      <div className='board-game' onClick={(e) => game(e)}>
+      <div className='board-game' onClick={(e) => {if (!timer) {game(e)}}}>
         <div className='item' id='block1' onClick={(e) => {if (games.block1) {e.preventDefault(); e.stopPropagation();}}}>{games.block1}</div>
         <div className='item' id='block2' onClick={(e) => {if (games.block2) {e.preventDefault(); e.stopPropagation();}}}>{games.block2}</div>
         <div className='item' id='block3' onClick={(e) => {if (games.block3) {e.preventDefault(); e.stopPropagation();}}}>{games.block3}</div>
@@ -179,6 +181,7 @@ function App() {
         <div className='item' id='block8' onClick={(e) => {if (games.block8) {e.preventDefault(); e.stopPropagation();}}}>{games.block8}</div>
         <div className='item' id='block9' onClick={(e) => {if (games.block9) {e.preventDefault(); e.stopPropagation();}}}>{games.block9}</div>
       </div>
+      <div className='result' style={{ top: result.top, left: result.left, width: result.width, transform: result.rotate }}></div>
     </>
   );
 }
