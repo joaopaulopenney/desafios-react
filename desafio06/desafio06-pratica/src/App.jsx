@@ -17,13 +17,57 @@ import PageHeader from './layout/PageHeader';
 import PageTitle from './layout/PageTitle';
 import Summary from './Summary';
 import TableRow from './TableRow';
+import { useState } from 'react';
 
 function App() {
+
+  const [products, setProducts] = useState([]);
+
+  const addProduct = () => {
+    const number = Math.floor(Math.random() * (Math.floor(1000) - Math.ceil(10)) + Math.ceil(10))
+
+    const data = {id: products.length + 1, name: "Produto", price: number, category: "Categoria", amount: 1}
+    setProducts((prev) => [...prev, data])
+  }
+
+  const plusAmount = (id) => {
+    var productsArray = [...products];
+
+    for (var i in productsArray) {
+      if (productsArray[i].id == id) {
+        productsArray[i].amount += 1
+      }
+    }
+
+    setProducts(productsArray);
+  }
+
+  const minusAmount = (id) => {
+    var productsArray = [...products];
+
+    for (var i in productsArray) {
+      if (productsArray[i].id == id && productsArray[i].amount > 1) {
+        productsArray[i].amount -= 1
+      }
+    }
+
+    setProducts(productsArray);
+  }
+
+  const deleteProduct = (id) => {
+    var filtered = products.filter((product) => product.id !== id);
+    setProducts(filtered);
+  }
+
+
+  console.log(products)
+
   return (
     <>
       <PageHeader />
       <main>
         <PageTitle data={'Seu carrinho'} />
+        <button onClick={addProduct}>Adicionar Produto</button>
         <div className='content'>
           <section>
             <table>
@@ -37,7 +81,9 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                <TableRow />
+                {products.map((product, key) => (
+                  <TableRow key={key} product={product} plusAmount={plusAmount} minusAmount={minusAmount} deleteProduct={deleteProduct} />
+                ))}
               </tbody>
             </table>
           </section>
