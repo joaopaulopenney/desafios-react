@@ -18,16 +18,15 @@ import PageTitle from './layout/PageTitle';
 import Summary from './Summary';
 import TableRow from './TableRow';
 import { useState } from 'react';
+import PageCreateProductButton from './layout/PageCreateProductButton';
 
 function App() {
 
   const [products, setProducts] = useState([]);
+  const [totalValue, setTotalValue] = useState(0);
 
-  const addProduct = () => {
-    const number = Math.floor(Math.random() * (Math.floor(1000) - Math.ceil(10)) + Math.ceil(10))
-
-    const data = {id: products.length + 1, name: "Produto", price: number, category: "Categoria", amount: 1}
-    setProducts((prev) => [...prev, data])
+  const addProduct = (data) => {
+    setProducts([...products, data]);
   }
 
   const plusAmount = (id) => {
@@ -67,7 +66,7 @@ function App() {
       <PageHeader />
       <main>
         <PageTitle data={'Seu carrinho'} />
-        <button onClick={addProduct}>Adicionar Produto</button>
+        <PageCreateProductButton addProduct={addProduct} />
         <div className='content'>
           <section>
             <table>
@@ -88,7 +87,7 @@ function App() {
             </table>
           </section>
           <aside>
-            <Summary />
+            <Summary totalValue={totalValue} />
           </aside>
         </div>
       </main>
