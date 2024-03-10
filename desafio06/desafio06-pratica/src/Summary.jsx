@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Summary = ({ totalValue }) => {
+  
   return (
     <>
       <div className='box'>
@@ -23,7 +24,7 @@ const Summary = ({ totalValue }) => {
         </div>
         <footer>
           <span>Total</span>
-          <span>R$ 418</span>
+          <span>{totalValue}</span>
         </footer>
       </div>
       <button>Finalizar Compra</button>

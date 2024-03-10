@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const TableRow = ({ product, plusAmount, minusAmount, deleteProduct }) => {
-  const { id, name, price, category, amount } = product
+  const { id, name, price, category, amount } = product;
 
   return (
     <tr>

@@ -17,7 +17,7 @@ import PageHeader from './layout/PageHeader';
 import PageTitle from './layout/PageTitle';
 import Summary from './Summary';
 import TableRow from './TableRow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageCreateProductButton from './layout/PageCreateProductButton';
 
 function App() {
@@ -58,6 +58,11 @@ function App() {
     setProducts(filtered);
   }
 
+  useEffect(() => {
+    for (var i in products) {
+      setTotalValue(products[i].price * products[i].amount)
+    }
+  }, [products])
 
   console.log(products)
 
