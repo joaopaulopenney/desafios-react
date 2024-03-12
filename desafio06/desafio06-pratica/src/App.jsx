@@ -4,6 +4,7 @@
 Você deve desenvolver um carrinho de compras funcional.
 Funcionalidades que esperamos que você desenvolva:
 
+todo - fazer um placeholder para quando não houver itens no carrinho
 todo - inserção de novos produtos no carrinho
 todo - remoção de produtos já inseridos
 todo - alteração de quantidade de cada item 
@@ -17,13 +18,13 @@ import PageHeader from './layout/PageHeader';
 import PageTitle from './layout/PageTitle';
 import Summary from './Summary';
 import TableRow from './TableRow';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PageCreateProductButton from './layout/PageCreateProductButton';
 
 function App() {
 
   const [products, setProducts] = useState([]);
-  const [totalValue, setTotalValue] = useState(0);
+  const [totalValueAll, setTotalValueAll] = useState(0);
 
   const addProduct = (data) => {
     setProducts([...products, data]);
@@ -46,7 +47,7 @@ function App() {
 
     for (var i in productsArray) {
       if (productsArray[i].id == id && productsArray[i].amount > 1) {
-        productsArray[i].amount -= 1
+        productsArray[i].amount -= 1;
       }
     }
 
@@ -58,11 +59,17 @@ function App() {
     setProducts(filtered);
   }
 
-  useEffect(() => {
-    for (var i in products) {
-      setTotalValue(products[i].price * products[i].amount)
+  const updateTotalValue = (id, totalValue) => {
+    var productsArray = [...products];
+
+    for (var i in productsArray) {
+      if (productsArray[i].id == id) {
+        productsArray[i].totalValue = totalValue;
+      }
     }
-  }, [products])
+
+    setProducts(productsArray);
+  } 
 
   console.log(products)
 
@@ -85,14 +92,17 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product, key) => (
-                  <TableRow key={key} product={product} plusAmount={plusAmount} minusAmount={minusAmount} deleteProduct={deleteProduct} />
-                ))}
+                {
+                  products.length > 0 &&
+                    products.map((product, key) => (
+                    <TableRow key={key} product={product} plusAmount={plusAmount} minusAmount={minusAmount} deleteProduct={deleteProduct} updateTotalValue={updateTotalValue} />
+                  )) || <tr><td><span>Não há itens no carrinho.</span></td></tr>
+                }
               </tbody>
             </table>
           </section>
           <aside>
-            <Summary totalValue={totalValue} />
+            <Summary products={products} totalValueAll={totalValueAll} setTotalValueAll={setTotalValueAll} />
           </aside>
         </div>
       </main>

@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Summary = ({ totalValue }) => {
+const Summary = ({ products, totalValueAll, setTotalValueAll }) => {
+
+
+  useEffect(() => {
+    var sum = 0;
+
+    for (var i in products) {
+      sum += products[i].totalValue;
+    }
+
+    setTotalValueAll(sum)
+  }, [products])
   
   return (
     <>
@@ -9,7 +20,7 @@ const Summary = ({ totalValue }) => {
         <div className='info'>
           <div>
             <span>Sub-total</span>
-            <span>{totalValue}</span>
+            <span>{totalValueAll}</span>
           </div>
           <div>
             <span>Frete</span>
@@ -24,10 +35,10 @@ const Summary = ({ totalValue }) => {
         </div>
         <footer>
           <span>Total</span>
-          <span>{totalValue}</span>
+          <span>{totalValueAll}</span>
         </footer>
       </div>
-      <button>Finalizar Compra</button>
+      <button onClick={() => { if (totalValueAll > 0) {alert(`Sua compra foi de ${totalValueAll} reais.`); location.reload();} }}>Finalizar Compra</button>
     </>
   );
 };

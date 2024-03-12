@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 
-const TableRow = ({ product, plusAmount, minusAmount, deleteProduct }) => {
-  const { id, name, price, category, amount } = product;
+const TableRow = ({ product, plusAmount, minusAmount, deleteProduct, updateTotalValue }) => {
+  const { id, name, price, category, amount, totalValue } = product;
+
+  useEffect(() => {
+    updateTotalValue(id, (price * amount))
+  }, [amount])
 
   return (
     <tr>
@@ -26,7 +30,7 @@ const TableRow = ({ product, plusAmount, minusAmount, deleteProduct }) => {
           </button>
         </div>
       </td>
-      <td>{price * amount}</td>
+      <td>{totalValue}</td>
       <td>
         <button className='remove' onClick={() => deleteProduct(id)}>
           <i className='bx bx-x'></i>
