@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Summary = ({ products, totalValueAll, setTotalValueAll }) => {
+const Summary = ({ products, totalValueAll, setTotalValueAll, setModal }) => {
 
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Summary = ({ products, totalValueAll, setTotalValueAll }) => {
             <span>Gratuito</span>
           </div>
           <div>
-            <button>
+            <button onClick={() => setModal("block")}>
               Adicionar cupom de desconto
               <i className='bx bx-right-arrow-alt'></i>
             </button>

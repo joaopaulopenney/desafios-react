@@ -20,11 +20,13 @@ import Summary from './Summary';
 import TableRow from './TableRow';
 import { useState } from 'react';
 import PageCreateProductButton from './layout/PageCreateProductButton';
+import PageModal from './layout/PageModal';
 
 function App() {
 
   const [products, setProducts] = useState([]);
   const [totalValueAll, setTotalValueAll] = useState(0);
+  const [modal, setModal] = useState("none");
 
   const addProduct = (data) => {
     setProducts([...products, data]);
@@ -75,6 +77,7 @@ function App() {
 
   return (
     <>
+      <PageModal totalValueAll={totalValueAll} setTotalValueAll={setTotalValueAll} modal={modal} setModal={setModal} />
       <PageHeader />
       <main>
         <PageTitle data={'Seu carrinho'} />
@@ -102,7 +105,7 @@ function App() {
             </table>
           </section>
           <aside>
-            <Summary products={products} totalValueAll={totalValueAll} setTotalValueAll={setTotalValueAll} />
+            <Summary products={products} totalValueAll={totalValueAll} setTotalValueAll={setTotalValueAll} setModal={setModal} />
           </aside>
         </div>
       </main>
