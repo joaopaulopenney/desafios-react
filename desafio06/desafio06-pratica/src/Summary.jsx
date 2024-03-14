@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Summary = ({ products, totalValueAll, setTotalValueAll, setModal }) => {
+const Summary = ({ products, totalValueAll, setTotalValueAll, setModal, coupon }) => {
 
 
   useEffect(() => {
@@ -10,8 +10,14 @@ const Summary = ({ products, totalValueAll, setTotalValueAll, setModal }) => {
       sum += products[i].totalValue;
     }
 
-    setTotalValueAll(sum)
-  }, [products])
+    if (coupon === false) {
+      console.log(coupon);
+      setTotalValueAll(sum);
+    } else {
+      console.log(coupon);
+      setTotalValueAll(sum - (sum / 10));
+    }
+  }, [products, coupon])
   
   return (
     <>
@@ -35,7 +41,7 @@ const Summary = ({ products, totalValueAll, setTotalValueAll, setModal }) => {
         </div>
         <footer>
           <span>Total</span>
-          <span>{totalValueAll}</span>
+          <span>{totalValueAll}{coupon && " (-10%)"}</span>
         </footer>
       </div>
       <button onClick={() => { if (totalValueAll > 0) {alert(`Sua compra foi de ${totalValueAll} reais.`); location.reload();} }}>Finalizar Compra</button>

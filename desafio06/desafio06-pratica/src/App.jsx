@@ -27,6 +27,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [totalValueAll, setTotalValueAll] = useState(0);
   const [modal, setModal] = useState("none");
+  const [coupon, setCoupon] = useState(false);
 
   const addProduct = (data) => {
     setProducts([...products, data]);
@@ -73,11 +74,9 @@ function App() {
     setProducts(productsArray);
   } 
 
-  console.log(products)
-
   return (
     <>
-      <PageModal totalValueAll={totalValueAll} setTotalValueAll={setTotalValueAll} modal={modal} setModal={setModal} />
+      <PageModal totalValueAll={totalValueAll} setTotalValueAll={setTotalValueAll} modal={modal} setModal={setModal} coupon={coupon} setCoupon={setCoupon} />
       <PageHeader />
       <main>
         <PageTitle data={'Seu carrinho'} />
@@ -105,7 +104,7 @@ function App() {
             </table>
           </section>
           <aside>
-            <Summary products={products} totalValueAll={totalValueAll} setTotalValueAll={setTotalValueAll} setModal={setModal} />
+            <Summary products={products} totalValueAll={totalValueAll} setTotalValueAll={setTotalValueAll} setModal={setModal} coupon={coupon} />
           </aside>
         </div>
       </main>

@@ -248,6 +248,18 @@ aside {
 
     button {
       margin-left: 10px;
+      background-color: white;
+      border: 1px solid rgba(0, 0, 0, 0.384);
+      color: green;
+      padding: 5px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    button:active {
+      opacity: 1;
     }
 
     span {
