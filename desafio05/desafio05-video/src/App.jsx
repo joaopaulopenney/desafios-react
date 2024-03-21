@@ -29,14 +29,18 @@ function App() {
     axios
       .get('https://pokeapi.co/api/v2/pokemon')
       .then((response) => {
-
+        // reordenando alfabeticamente nossos pokemons
         const sortedArray = [...response.data.results];
 
         sortedArray.sort((a, b) => {
           return a.name.localeCompare(b.name);
         });
 
-        return setList(sortedArray);
+        const promisesArray = sortedArray.map((item) => {
+            return axios.get(item.url);
+          });
+
+        Promise.all(promisesArray).then(values => setList(values));
       });
   }, []);
 
@@ -46,28 +50,15 @@ function App() {
       <h3>desafio fernandev</h3>
       <h1>consumir api pokémon</h1>
       <hr />
+      {list.length === 0 && "carregando pokemons..."}
       {list.map(item => (
-         <Pokemon key={item.name} data={item} />
+         <Pokemon key={item.data.name} details={item.data} />
       ))}
     </>
   );
 }
 
-const Pokemon = ({ data }) => {
-  const [details, setDetails] = useState(null);
-
-  const fetchData = () => {
-    setTimeout(() => {
-      axios
-      .get(data.url)
-      .then((response) => setDetails(response.data));
-    }, getRandom(1, 6) * 1000);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+const Pokemon = ({ details }) => {
   if (!details) {
     return <div>-</div>;
   }
@@ -79,9 +70,5 @@ const Pokemon = ({ data }) => {
     </div> 
   );
 };
-
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
 
 export default App;
