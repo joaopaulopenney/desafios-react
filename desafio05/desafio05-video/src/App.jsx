@@ -28,8 +28,16 @@ function App() {
   useEffect(() => {
     axios
       .get('https://pokeapi.co/api/v2/pokemon')
-      .then((response) => setList(response.data.results));
+      .then((response) => {
 
+        const sortedArray = [...response.data.results];
+
+        sortedArray.sort((a, b) => {
+          return a.name.localeCompare(b.name);
+        });
+
+        return setList(sortedArray);
+      });
   }, []);
 
 
@@ -48,13 +56,19 @@ function App() {
 const Pokemon = ({ data }) => {
   const [details, setDetails] = useState(null);
 
-  useEffect(() => {
-    axios
+  const fetchData = () => {
+    setTimeout(() => {
+      axios
       .get(data.url)
       .then((response) => setDetails(response.data));
+    }, getRandom(1, 6) * 1000);
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  if (details === null) {
+  if (!details) {
     return <div>-</div>;
   }
 
@@ -64,6 +78,10 @@ const Pokemon = ({ data }) => {
       <span><b>{details.name}</b> - EXP {details.base_experience}</span>
     </div> 
   );
+};
+
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export default App;
